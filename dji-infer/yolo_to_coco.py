@@ -6,7 +6,7 @@ from PIL import Image
 # images_dir = 'images'
 # labels_dir = 'labels'
 # output_json = 'mmyolo_annotations.json'
-class_names = ['Hardhat', 'Mask', 'NO-Hardhat', 'NO-Mask', 'NO-Safety Vest', 'Person', 'Safety Cone', 'Safety Vest', 'machinery', 'vehicle']
+class_names = ['helmet', 'vest', 'head', 'person']
 
 def yolo_to_coco_bbox(bbox, img_w, img_h):
     x_center, y_center, w, h = bbox
@@ -67,5 +67,6 @@ def yolo_to_coco(images_dir, labels_dir, output_json):
     with open(output_json, 'w') as f:
         json.dump(coco_format, f, indent=4)
 
-yolo_to_coco('./helmet/train/images', './helmet/train/labels', './helmet/annotations/train_annotation.json')
-yolo_to_coco('./helmet/valid/images', './helmet/valid/labels', './helmet/annotations/valid_annotation.json')
+root_folder = '../dataset/'
+yolo_to_coco(root_folder + 'images/train', root_folder + 'labels/train', root_folder + 'annotations/train.json')
+yolo_to_coco(root_folder + 'images/val', root_folder + 'labels/val', root_folder + 'annotations/valid.json')
